@@ -45,17 +45,17 @@ describe Account do
 
   describe "#balance" do
     it "should properly sum all transactions" do
-      account.deposit! 100_000_000_000_000
-      account.withdraw! 50_000_000_000_000
-      account.balance.should equal(50_000_000_000_000)
+      account.stub(:transactions => [40, 60])
+      expect(account.balance).to equal(100)
     end
   end
 
   describe "#withdraw!" do
     it "should reduce account balance" do
-      account.deposit! 100_000_000_000_000
-      account.withdraw! 50_000_000_000_000
-      account.balance.should equal(50_000_000_000_000)
+      account.stub(:transactions => [100])
+      balance = account.withdraw! 50
+      expect(balance).to equal(50)
     end
   end
 end
+
